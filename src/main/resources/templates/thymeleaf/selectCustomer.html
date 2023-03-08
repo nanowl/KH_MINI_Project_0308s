@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>TITLE</title>
+</head>
+<body>
+    <h2>회원 정보</h2>
+    <table border="1" style="border-collapse: collapse">
+        <thead style="background-color: royalblue; color:white;">
+            <tr>
+                <th>회원 아이디</th>
+                <th>회원 비밀번호</th>
+                <th>회원 이름</th>
+                <th>연락처</th>
+                <th>이메일</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="customer : ${member}">
+                <td th:text="${customer.userId}"></td>
+                <td th:text="${customer.userPwd}"></td>
+                <td th:text="${customer.userName}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td th:text="${customer.eMail}"></td>
+                <td th:text="${customer.address}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

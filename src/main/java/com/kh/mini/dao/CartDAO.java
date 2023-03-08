@@ -1,6 +1,6 @@
 package com.kh.mini.dao;
 
-import com.kh.mini.JdbcMain;
+//import com.kh.mini.JdbcMain;
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.CartList;
 import com.kh.mini.vo.OrderList;

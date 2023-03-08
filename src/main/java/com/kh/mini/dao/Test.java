@@ -21,7 +21,7 @@ public class Test {
                     break;
                 case 2:
                     CustomerDAO customerDAO = new CustomerDAO();
-                    customerDAO.customerSelect();
+//                    customerDAO.customerSelect();
                     break;
                 case 3:
                     CartDAO cartDAO = new CartDAO();
