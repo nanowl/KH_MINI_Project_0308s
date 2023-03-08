@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderController {
     @GetMapping("/list")
     public String orderSelect(Model model) {
-        return "";
+        return "thymeleaf/";
     }
 }
