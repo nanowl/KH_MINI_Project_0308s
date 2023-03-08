@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>장바구니</h2>
+<table border="1" style = "border-collapse : collapse">
+    <thead> style = "background-color:royalblue; color : white; "
+    <tr>
+        <th>제품번호</th>
+        <th>유저아이디</th>
+        <th>수량</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cart : ${cart}">
+        <td th:text="${cart.PDT_NO_NUMBER}"></td>
+        <td th:text="${cart.USER_ID_CART}"></td>
+        <td th:text="${cart.cnt}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
