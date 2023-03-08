@@ -22,7 +22,7 @@ public class OrderDAO implements DAO{
     PreparedStatement pstmt = null;
 
     // ORDERLIST 테이블의 데이터를 모두 조회하는 메소드
-    public void listOrder() {
+    public List<OrderList> listOrder() {
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
@@ -36,7 +36,13 @@ public class OrderDAO implements DAO{
                 String loc = rs.getString("LOC");
                 int price = rs.getInt("PRICE");
 
-                OrderList vo = new OrderList(no, date, pdtNo, userId, loc, price);
+                OrderList vo = new OrderList();
+                vo.setNo(no);
+                vo.setDate(date);
+                vo.setPdtNo(pdtNo);
+                vo.setUserId(userId);
+                vo.setLoc(loc);
+                vo.setPrice(price);
                 list.add(vo);
             }
             Common.close(rs);
@@ -46,19 +52,21 @@ public class OrderDAO implements DAO{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return list;
     }
 
     //위 메소드를 오버로딩한 메소드 id를 파라미터로 받아와서 id값과 일치하는 데이터만을 조회한다.
     public void listOrder(String id) {
         try {
             conn = Common.getConnection();
-            stmt = conn.createStatement();
             // 기존의 외래키 상품번호 열을 이름으로 바꾸기 위해 부모테이블 PRODUCTS와 자식테이블 ORDERLIST를 조인
             String query = "SELECT O.ORDER_NO, O.ORDER_DATE, P.PRODUCT_NAME, O.USER_ID, O.LOC, O.PRICE " +
                             "FROM ORDERLIST O JOIN PRODUCTS P " +
                                     "ON O.PDT_NO = P.PRODUCT_ID " +
-                            "WHERE USER_ID = '" + id + "'" ;
-            rs = stmt.executeQuery(query);
+                            "WHERE USER_ID = ?" ;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
             while(rs.next()) {
                 int no = rs.getInt("ORDER_NO");
                 Date date = rs.getDate("ORDER_DATE");
@@ -157,30 +165,3 @@ public class OrderDAO implements DAO{
 
     }
 }
-
-//    public void orderSelect() {
-//        Scanner sc = new Scanner(System.in);
-//        while(true) {
-//            System.out.println("===== [OrderList Table] =====");
-//            System.out.println("메뉴를 선택 하세요 : ");
-//            System.out.println("[1]SELECT, [2]INSERT, [3]UPDATE, [4]DELETE, [5]EXIT");
-//            int sel = sc.nextInt();
-//            switch(sel) {
-//                case 1:
-//                    listOrder();
-//                    selectList();
-//                    break;
-//                case 2 :
-//                    insertList();
-//                    break;
-//                case 3 :
-//                    break;
-//                case 4 :
-//                    deleteList();
-//                    break;
-//                case 5 :
-//                    System.out.println("메뉴를 종료 합니다");
-//                    return;
-//            }
-//        }
-//    }

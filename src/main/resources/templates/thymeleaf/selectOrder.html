@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>사원 정보</h2>
+        <table border="1" style="border-collapse: collapse;">
+            <thead style="background-color: royalblue; color: white;">
+            <tr>
+                <th>주문번호</th>
+                <th>주문일자</th>
+                <th>상품이름</th>
+                <th>고객 아이디</th>
+                <th>배송지</th>
+                <th>가격</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${order}">
+                <td th:text="${order.no}"></td>
+                <td th:text="${order.date}"></td>
+                <td th:text="${order.pdtName}"></td>
+                <td th:text="${order.userId}"></td>
+                <td th:text="${order.loc}"></td>
+                <td th:text="${order.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+</body>
+</html>
