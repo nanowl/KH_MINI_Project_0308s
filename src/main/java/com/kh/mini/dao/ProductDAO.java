@@ -84,7 +84,7 @@ public class ProductDAO implements DAO {
             System.out.print(e.getProductName() + " ");
             System.out.print(e.getColor() + " ");
             System.out.print(e.getPrice() + " ");
-            System.out.print(e.getMade() + " ");
+            System.out.print(e.getMadeIn() + " ");
             System.out.println();
         }
     }
