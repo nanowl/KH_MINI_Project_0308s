@@ -1,10 +1,8 @@
 package com.kh.mini.dao;
 
-import com.kh.mini.JdbcMain;
+
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.CartList;
-import com.kh.mini.vo.OrderList;
-import com.kh.mini.vo.Products;
 
 import java.sql.*;
 import java.util.*;
@@ -23,7 +21,7 @@ public class CartDAO {
     PreparedStatement pstmt = null;
 
 
-    public void viewCart(String id) {
+    public List<CartList> viewCart() {
         try {
             list.clear();
             conn = Common.getConnection();
@@ -32,14 +30,14 @@ public class CartDAO {
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                String no = rs.getString("PRODUCT_NAME");
+                int no = rs.getInt("PDT_NO_NUMBER");
                 String userId = rs.getString("USER_ID_CART");
                 int cnt = rs.getInt("cnt");
-                if (id.equals(userId)) {
-                    CartList vo = new CartList(userId, no, cnt);
+
+                    CartList vo = new CartList( no, userId , cnt);
 
                     list.add(vo);
-                }
+
             }
             Common.close(rs);
             Common.close(stmt);
@@ -48,16 +46,7 @@ public class CartDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("=========================================");
-        System.out.println( id + " 님의 장바구니 목록");
-        System.out.println("=========================================");
-        for (CartList e : list) {
-
-            System.out.println("상품명 : " + e.getPRODUCT_NAME() + "["+ e.getCnt() +"]" );
-
-            //System.out.println(" 수량 :  " + e.getCnt());
-            System.out.println("-----------------------------------------");
-        }
+        return list;
     }
 
 
