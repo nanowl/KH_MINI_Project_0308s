@@ -20,6 +20,7 @@ public class ProductDAO implements DAO {
     List<Products> list = new ArrayList<>();
 
     public List<Products> listProducts() {
+        List<Products> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();

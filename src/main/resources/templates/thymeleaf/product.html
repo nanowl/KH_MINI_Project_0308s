@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Furniture information</title>
+    <div>
+        <p>KH shopping mall</p>
+    </div>
+    <h2>가구 정보 [Furniture information]</h2>
+
+</head>
+<body>
+
+
+<table border="1" style="border-collapse: collapse">
+    <thead style="background-color: beige; color: gray;">
+    <tr>
+        <th>PRODUCT ID</th>
+        <th>PRODUCT NAME</th>
+        <th>COLOR</th>
+        <th>PRICE</th>
+        <th>MADE IN</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="list : ${product}">
+        <td th:text="${list.productId}"></td>
+        <td th:text="${list.productName}"></td>
+        <td th:text="${list.color}"></td>
+        <td th:text="${list.price}"></td>
+        <td th:text="${list.madeIn}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
