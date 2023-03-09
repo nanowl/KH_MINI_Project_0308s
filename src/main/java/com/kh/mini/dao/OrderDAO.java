@@ -36,8 +36,8 @@ public class OrderDAO implements DAO{
                 String loc = rs.getString("LOC");
                 int price = rs.getInt("PRICE");
 
-                OrderList vo = new OrderList(no, date, pdtNo, userId, loc, price);
-                list.add(vo);
+//                OrderList vo = new OrderList(no, date, pdtNo, userId, loc, price);
+//                list.add(vo);
             }
             Common.close(rs);
             Common.close(stmt);

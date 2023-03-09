@@ -2,7 +2,6 @@ package com.kh.mini.dao;
 
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.Customer;
-import com.kh.mini.vo.Products;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +15,8 @@ public class CustomerDAO implements DAO {
     ResultSet rs = null;
     List<Customer> list = new ArrayList<>();
 
-    public void listCustomer() {
+    public List<Customer> CustomerSelect() {
+        List<Customer> list = new ArrayList<>();
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
@@ -43,34 +43,35 @@ public class CustomerDAO implements DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return list;
     }
 
-    public void customerSelect() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("===== [Customer Table] =====");
-            System.out.println("메뉴를 선택 하세요 : ");
-            System.out.println("[1]SELECT, [2]INSERT, [3]UPDATE, [4]DELETE, [5]EXIT");
-            int sel = sc.nextInt();
-            switch (sel) {
-                case 1:
-                    listCustomer();
-                    selectList();
-                    break;
-                case 2:
-                    insertList();
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    deleteList();
-                    break;
-                case 5:
-                    System.out.println("메뉴를 종료 합니다");
-                    return;
-            }
-        }
-    }
+//    public List<Customer> customerSelect() {
+//        Scanner sc = new Scanner(System.in);
+//        while (true) {
+//            System.out.println("===== [Customer Table] =====");
+//            System.out.println("메뉴를 선택 하세요 : ");
+//            System.out.println("[1]SELECT, [2]INSERT, [3]UPDATE, [4]DELETE, [5]EXIT");
+//            int sel = sc.nextInt();
+//            switch (sel) {
+//                case 1:
+//                    listCustomer();
+//                    selectList();
+//                    break;
+//                case 2:
+//                    insertList();
+//                    break;
+//                case 3:
+//                    break;
+//                case 4:
+//                    deleteList();
+//                    break;
+//                case 5:
+//                    System.out.println("메뉴를 종료 합니다");
+//                    return list;
+//            }
+//        }
+//    }
 
 
     @Override
@@ -80,12 +81,62 @@ public class CustomerDAO implements DAO {
             System.out.print(e.getUserPwd() + " ");
             System.out.print(e.getUserName() + " ");
             System.out.print(e.getPhone() + " ");
-            System.out.print(e.geteMail() + " ");
+            System.out.print(e.getEMail() + " ");
             System.out.print(e.getAddress() + " ");
             System.out.println();
         }
     }
 
+
+
+    public void insertList(Customer customer) {
+        Scanner sc = new Scanner(System.in);
+
+        String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ?, ?)";
+
+        try {
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, customer.getUserId());
+            pstmt.setString(2, customer.getUserPwd());
+            pstmt.setString(3, customer.getUserName());
+            pstmt.setString(4, customer.getPhone());
+            pstmt.setString(5, customer.getEMail());
+            pstmt.setString(6, customer.getAddress());
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(pstmt);
+        Common.close(conn);
+    }
+
+
+    @Override
+    public void deleteList() {
+
+    }
+
+    public boolean login(String ID, String Password) {
+        conn = Common.getConnection();
+        try {
+            String SQL = "SELECT USER_ID, USER_PWD FROM CUSTOMER WHERE USER_ID = ? AND USER_PWD = ?";
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, ID);
+            pstmt.setString(2, Password);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("USER_PWD").equals(Password) && rs.getString("USER_ID").equals(ID))
+                    return true;
+                else
+                    return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public void insertList() {
@@ -123,32 +174,6 @@ public class CustomerDAO implements DAO {
         }
         Common.close(pstmt);
         Common.close(conn);
-    }
-
-
-    @Override
-    public void deleteList() {
-
-    }
-
-    public boolean login(String ID, String Password) {
-        conn = Common.getConnection();
-        try {
-            String SQL = "SELECT USER_ID, USER_PWD FROM CUSTOMER WHERE USER_ID = ? AND USER_PWD = ?";
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, ID);
-            pstmt.setString(2, Password);
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                if (rs.getString("USER_PWD").equals(Password) && rs.getString("USER_ID").equals(ID))
-                    return true;
-                else
-                    return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 }
 
