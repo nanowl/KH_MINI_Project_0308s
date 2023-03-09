@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <p>메인화면입니다.</p>
+        <form th:action="@{/order/list}" th:object="${order}" method="post">
+            <div>
+                <label for="userId">ID:</label>
+                <input type="text" id="userId" th:name="userId" th:value="${userId}"/>
+            </div>
+            <div>
+                <label for="pwd">PW:</label>
+                <input type="password" id="pwd" th:name="pwd" th:value="${pwd}">
+            </div>
+            <button type="submit">주문목록보기</button>
+        </form>
+        <button onclick="location.href='/order/add'">주문하기</button >
+
+</body>
+</html>

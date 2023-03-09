@@ -19,4 +19,5 @@ public class OrderList {
     String userId;
     String loc;
     int price;
+    int cnt;
 }
