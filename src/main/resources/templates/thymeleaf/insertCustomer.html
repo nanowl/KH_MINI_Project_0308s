@@ -3,11 +3,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>KH/furniture/page/join/membership</title>
+    <title>[KH furniture]회원 가입</title>
 </head>
 <body>
     <h2>회원 정보 입력</h2>
-    <form th:action="@{customer/insert}" th:object="${member}" method="post">
+    <form th:action="@{/customer/insert}" th:object="${member}" method="post">
         <div>
             <label for="userId">ID:</label>
             <input type="text" id="userId" th:field="*{userId}" />

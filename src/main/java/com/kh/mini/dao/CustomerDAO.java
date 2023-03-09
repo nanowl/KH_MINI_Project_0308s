@@ -88,35 +88,21 @@ public class CustomerDAO implements DAO {
     }
 
 
-    @Override
-    public void insertList() {
+
+    public void insertList(Customer customer) {
         Scanner sc = new Scanner(System.in);
-
-
-        System.out.print("ID를 입력해주세요.");
-        String userId = sc.next();
-        System.out.print("비밀번호를 입력해주세요.");
-        String userPwd = sc.next();
-        System.out.print("성함을 입력해주세요.");
-        String userName = sc.next();
-        System.out.print("전화번호를 입력해주세요.");
-        String phone = sc.next();
-        System.out.print("이메일을 입력해주세요.");
-        String eMail = sc.next();
-        System.out.print("주소를 입력해주세요.");
-        String address = sc.next();
 
         String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, userId);
-            pstmt.setString(2, userPwd);
-            pstmt.setString(3, userName);
-            pstmt.setString(4, phone);
-            pstmt.setString(5, eMail);
-            pstmt.setString(6, address);
+            pstmt.setString(1, customer.getUserId());
+            pstmt.setString(2, customer.getUserPwd());
+            pstmt.setString(3, customer.getUserName());
+            pstmt.setString(4, customer.getPhone());
+            pstmt.setString(5, customer.getEMail());
+            pstmt.setString(6, customer.getAddress());
             pstmt.executeUpdate();
 
         } catch (Exception e) {
@@ -152,7 +138,8 @@ public class CustomerDAO implements DAO {
         return false;
     }
 
-    public void insertList(Customer customer) {
+    @Override
+    public void insertList() {
         Scanner sc = new Scanner(System.in);
 
 
