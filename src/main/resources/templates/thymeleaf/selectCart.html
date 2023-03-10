@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+<body>
+<h2>장바구니</h2>
+
+
+<form method="post" action="/select/cart">
+    <label for="userId">사용자 ID:</label>
+    <input type="text" name="userId" id="userId">
+    <button type="submit">장바구니 보기</button>
+</form>
+<form method="get" action="/insert/cart">
+    <button type="submit">상품 추가</button>
+</form>
+<table border="1" style="border-collapse: collapse;">
+    <thead style="background-color: royalblue; color: white;">
+
+    <tr>
+        <th>유저아이디</th>
+        <th>상품명</th>
+        <th>수량</th>
+        <th>가격</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cart : ${cartList}">
+        <td th:text="${cart.userId}"></td>
+        <td th:text="${cart.productName}"></td>
+        <td th:text="${cart.quantity}"></td>
+        <td th:text="${cart.price}"></td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

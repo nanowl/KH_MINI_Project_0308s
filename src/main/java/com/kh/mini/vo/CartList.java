@@ -1,3 +1,5 @@
+
+
 package com.kh.mini.vo;
 
 import lombok.AllArgsConstructor;
@@ -7,18 +9,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class CartList {
-    private int PDT_NO_NUMBER;
-    private String USER_ID_CART;
-    int price;
-    String PRODUCT_NAME;
-    private int cnt;
-
-    public CartList(int PDT_NO_NUMBER, String USER_ID_CART, int cnt) {
-        this.PDT_NO_NUMBER = PDT_NO_NUMBER;
-        this.USER_ID_CART = USER_ID_CART;
-        this.cnt = cnt;
+    private String userId;
+    private String productName;
+    private int quantity;
+    private int price;
+    public CartList(String userId, String productName, int quantity,int price) {
+        this.userId = userId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
     }
 }
